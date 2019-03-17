@@ -1,0 +1,20 @@
+{
+  "name": "purescript-concur-react-router",
+  "version": "0.1.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ajnsit/purescript-concur-react-router.git"
+  },
+  "dependencies": {
+    "purescript-concur-react": "^0.3.4",
+    "purescript-functions": "^4.0.0",
+    "purescript-effect": "^2.0.1"
+  }
+}
