@@ -2,7 +2,9 @@
 
 React Router bindings for Purescript Concur React.
 
-## Usage
+## Documentation
+
+**TODO**
 
 There are a few components available to you -
 
@@ -13,6 +15,12 @@ Then you can use `route` to match specific routes pattern and display some widge
 You use `switch` to *exclusively* match routes. Only the *first* route that matches inside a switch will be rendered. For example, to provide a 404 page, put a route at the end which performs an inexact match on "/" (i.e. matches everything).
 
 To allow the user to switch routes, you can provide links with `linkTo`.
+
+## Example
+
+A simple example with dynamic routes is available at https://github.com/ajnsit/purescript-concur-react-router/blob/master/src/Main.purs.
+
+You can see it running at - https://ajnsit.github.io/purescript-concur-react-router
 
 ## TODO - In order of importance
 
