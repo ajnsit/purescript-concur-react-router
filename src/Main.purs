@@ -37,7 +37,7 @@ pagesetWithUsers = switch []
          void $ D.button [P.onClick] [D.text "If you click the button one more time, the users page will disappear!"]
     ]
   , route (Exact "/users") [D.h1' [D.text "Users page"]]
-  , route (InExact "/") [D.h1' [D.text "404 page"]]
+  , route CatchAll [D.h1' [D.text "404 page"]]
   ]
 
 pagesetWithoutUsers :: forall a. Widget HTML a
@@ -47,5 +47,5 @@ pagesetWithoutUsers = switch []
     , D.div'
       [D.text "Now you've done it! There is no more /users page! Dynamic route configuration!"]
     ]
- , route (InExact "/") [D.h1' [D.text "404 page"]]
+ , route CatchAll [D.h1' [D.text "404 page"]]
  ]

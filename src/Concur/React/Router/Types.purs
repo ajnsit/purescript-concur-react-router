@@ -1,5 +1,6 @@
 module Concur.React.Router.Types where
 
+import Data.Maybe (Maybe(..))
 import Foreign (Foreign)
 
 -- | The data passed to a route handler
@@ -28,12 +29,14 @@ type Location st =
   }
 
 data RoutePattern
-  = Exact String
+  = CatchAll
+  | Exact String
   | InExact String
 
-getPathFrom :: RoutePattern -> String
-getPathFrom (Exact s) = s
-getPathFrom (InExact s) = s
+getPathFrom :: RoutePattern -> Maybe String
+getPathFrom CatchAll = Nothing
+getPathFrom (Exact s) = Just s
+getPathFrom (InExact s) = Just s
 
 isExact :: RoutePattern -> Boolean
 isExact (Exact _) = true

@@ -8,6 +8,7 @@ import Concur.React.Router.FFI (_browserRouter, _hashRouter, _link, _route, _swi
 import Concur.React.Router.Types (RoutePattern, RouteHandlerArgs, getPathFrom, isExact)
 import Control.Applicative (pure)
 import Control.MultiAlternative (orr)
+import Data.Maybe (Maybe(..))
 import Data.Monoid ((<>))
 import Effect.Uncurried (mkEffectFn1)
 import Prelude (discard)
@@ -36,15 +37,26 @@ basename = P.unsafeMkProp "basename"
 noLeadingSlash :: forall a. Boolean -> P.Props a
 noLeadingSlash p = P.unsafeMkProp "hashType" (if p then "noslash" else "slash")
 
+-- Private
+pathProp :: RoutePattern -> Array R.Props
+pathProp pattern = case getPathFrom pattern of
+  Nothing -> []
+  Just path -> [R.unsafeMkProps "path" path]
+
+-- Private
+exactProp :: RoutePattern -> Array R.Props
+exactProp pattern = if isExact pattern then [R.unsafeMkProps "exact" ""] else []
+
 -- | Connect a route pattern and a route handler
 route :: forall a. RoutePattern -> Array (Widget HTML a) -> Widget HTML a
 route pattern ws = wrapViewEvent mkView (orr ws)
   where
   mkView h v =
     [ _route
-      ([ R.unsafeMkProps "path" (getPathFrom pattern)
-      , R.unsafeMkProps "component" (mkEffectFn1 (handler' v))
-      ] <> (if isExact pattern then [R.unsafeMkProps "exact" ""] else []))
+      ([R.unsafeMkProps "component" (mkEffectFn1 (handler' v))]
+        <> exactProp pattern
+        <> pathProp pattern
+      )
     ]
   handler' v a = do
     debugShow "ROUTE" a
