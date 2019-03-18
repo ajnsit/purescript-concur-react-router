@@ -1,31 +1,36 @@
 module Concur.React.Router.Types where
 
+import Concur.React.Router.FFI (toString)
 import Data.Maybe (Maybe(..))
-import Foreign (Foreign)
+import Data.Show (class Show)
+
+data UnImplemented
+instance showUnImplemented :: Show UnImplemented where
+  show = toString
 
 -- | The data passed to a route handler
-
--- | The data passed to a route handler
-type RouteHandlerArgs st =
+type RouteHandlerArgs =
   { match :: Match
-  , location :: Location st
-  , history :: Foreign
+  , location :: Location
+  , history :: UnImplemented
   -- ^ TODO: Wrap history package
   }
 
 type Match =
-  { params :: Foreign
+  { params :: UnImplemented
+    -- ^ TODO: Implement params
   , isExact :: Boolean
   , path :: String
   , url :: String
   }
 
-type Location st =
+type Location =
   { key :: String
   , pathname :: String
   , search :: String
   , hash :: String
-  , state :: st
+  , state :: UnImplemented
+    -- ^ TODO: Implement state
   }
 
 data RoutePattern

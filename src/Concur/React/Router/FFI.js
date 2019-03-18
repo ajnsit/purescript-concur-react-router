@@ -13,3 +13,9 @@ function debugShow(s) {
 }
 
 exports.debugShow = debugShow;
+
+function toString(a) {
+    return JSON.stringify(a, null, 2); // ("" + a);
+}
+
+exports.toString = toString;

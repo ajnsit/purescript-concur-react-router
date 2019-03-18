@@ -1,10 +1,5 @@
 module Concur.React.Router.FFI where
 
-import Concur.Core (Widget)
-import Concur.React (HTML)
-import Concur.React.Props as P
-import Concur.React.Router.Types (RouteHandlerArgs)
-import Data.Function.Uncurried (mkFn1)
 import Data.Monoid (mempty)
 import Data.Unit (Unit)
 import Effect (Effect)
@@ -20,8 +15,6 @@ foreign import _routeComponent :: ForeignRouterReactComponent
 foreign import _switchComponent :: ForeignRouterReactComponent
 foreign import _linkComponent :: ForeignRouterReactComponent
 
-foreign import debugShow :: forall a. String -> a -> Effect Unit
-
 _browserRouter :: Array R.Props -> Array ReactElement -> ReactElement
 _browserRouter props children = createElement _browserRouterComponent (unsafeFromPropsArray props :: {}) children
 
@@ -36,3 +29,7 @@ _link props = createElement _linkComponent (unsafeFromPropsArray props :: {})
 
 _switch :: Array R.Props -> Array ReactElement -> ReactElement
 _switch props = createElement _switchComponent (unsafeFromPropsArray props :: {})
+
+-- Debugging only
+foreign import debugShow :: forall a. String -> a -> Effect Unit
+foreign import toString :: forall a. a -> String
