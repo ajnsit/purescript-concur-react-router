@@ -23,7 +23,7 @@ rootWidget = withBrowserRouter [] $ D.div'
   ]
 
 showArgs :: forall a. RouteHandlerArgs -> Widget HTML a
-showArgs = D.text <<< toString
+showArgs x = D.text (toString x)
 
 links :: forall a. Widget HTML a
 links = D.div'
