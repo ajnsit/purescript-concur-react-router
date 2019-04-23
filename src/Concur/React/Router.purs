@@ -1,11 +1,11 @@
 module Concur.React.Router where
 
 import Concur.Core (Widget, wrapViewEventFunc)
-import Concur.React (HTML, el, el')
+import Concur.React (HTML, el, el', elLeaf)
 import Concur.React.DOM (El1, El)
 import Concur.React.Props as P
-import Concur.React.Router.FFI (_browserRouter, _hashRouter, _link, _route, _switch)
-import Concur.React.Router.Types (RoutePattern, RouteHandlerArgs, getPathFrom, isExact)
+import Concur.React.Router.FFI (_browserRouter, _hashRouter, _link, _route, _switch, _redirect)
+import Concur.React.Router.Types (RoutePattern, RouteHandlerArgs, Redirect, getPathFrom, isExact)
 import Data.Maybe (Maybe(..))
 import Data.Monoid ((<>))
 import Effect.Uncurried (mkEffectFn1)
@@ -68,3 +68,9 @@ location = P.unsafeMkProp "location"
 -- | Switch between multiple routes
 switch :: El
 switch = el' _switch
+
+-- | Change route. Rendering this widget will navigate to a new location. The 
+-- new location will override the current location in the history stack, like 
+-- server-side redirects (HTTP 3xx) do.
+redirect :: forall a. Redirect -> Widget HTML a
+redirect r = elLeaf _redirect [P.unsafeMkProp "to" r.to, P.unsafeMkProp "push" r.push]

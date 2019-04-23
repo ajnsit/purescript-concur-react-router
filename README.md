@@ -16,6 +16,8 @@ You use `switch` to *exclusively* match routes. Only the *first* route that matc
 
 To allow the user to switch routes, you can provide links with `linkTo`.
 
+To navigate to new location, use `redirect` widget.
+
 ## Example
 
 A simple example with dynamic routes is available at https://github.com/ajnsit/purescript-concur-react-router/blob/master/src/Main.purs.
