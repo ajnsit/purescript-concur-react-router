@@ -38,6 +38,12 @@ data RoutePattern
   | Exact String
   | InExact String
 
+type Redirect = 
+  { to :: String
+    -- ^ TODO: Support for state
+  , push :: Boolean
+  }
+
 getPathFrom :: RoutePattern -> Maybe String
 getPathFrom CatchAll = Nothing
 getPathFrom (Exact s) = Just s

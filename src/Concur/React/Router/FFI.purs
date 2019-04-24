@@ -14,6 +14,7 @@ foreign import _hashRouterComponent :: ForeignRouterReactComponent
 foreign import _routeComponent :: ForeignRouterReactComponent
 foreign import _switchComponent :: ForeignRouterReactComponent
 foreign import _linkComponent :: ForeignRouterReactComponent
+foreign import _redirectComponent :: ForeignRouterReactComponent
 
 _browserRouter :: Array R.Props -> Array ReactElement -> ReactElement
 _browserRouter props children = createElement _browserRouterComponent (unsafeFromPropsArray props :: {}) children
@@ -29,6 +30,9 @@ _link props = createElement _linkComponent (unsafeFromPropsArray props :: {})
 
 _switch :: Array R.Props -> Array ReactElement -> ReactElement
 _switch props = createElement _switchComponent (unsafeFromPropsArray props :: {})
+
+_redirect :: Array R.Props -> ReactElement
+_redirect props = createElement _redirectComponent (unsafeFromPropsArray props :: {}) mempty
 
 -- Debugging only
 foreign import debugShow :: forall a. String -> a -> Effect Unit

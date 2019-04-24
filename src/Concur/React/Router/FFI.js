@@ -3,6 +3,7 @@ exports._hashRouterComponent = require("react-router-dom").HashRouter;
 exports._routeComponent = require("react-router-dom").Route;
 exports._switchComponent = require("react-router-dom").Switch;
 exports._linkComponent = require("react-router-dom").Link;
+exports._redirectComponent = require("react-router-dom").Redirect;
 
 function debugShow(s) {
     return function(a) {
